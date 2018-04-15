@@ -6,7 +6,7 @@ const
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()), // creates express http server
   request = require("request"),
-  ACCESS_TOKEN = "EAAcTknAhZB8gBAMBZCS3dqrL8x3mSFCzn1BgTVzhrjvhxLOfBR8lpKaZAY5m6qKmYbAYNAvdhhVZCDBZA7z5scNW0ZAZCQfdlKJs10VBC932Nqb7R5cadbq1hhgVrq6xCPz87CHejNZCnNRyDT9z4vMzL7V9q6PhagV7B2vs7qde0rvJLHBtWRuZC";
+  ACCESS_TOKEN = "EAAChQKEZAjl0BANizrGSKhtZCZBZAEZCeDZBlD9SwmrUaoqIZByz66daTCbY1wytgZA9WyjEvdPzBLWWtEl5WVQ1Dj7iNtMkKJmz2lLrKuFNxDXAd7RZAzdNpf9ihPzmnmFdbkt1vn6VoIXMzoNh0FDNh93ge65kidqgZAZClEXbRqxaZBqtLe7tSEIx";
 
 
 // Sets server port and logs message on success
@@ -97,7 +97,8 @@ function processEvent(webhook_event) {
 
 function sendMessage(recipientID, text) {
     request({
-        url: "https://graph.facebook.com/v2.12/me/messages?access_token="+ ACCESS_TOKEN,
+        //url: "https://graph.facebook.com/v2.12/me/messages?access_token="+ ACCESS_TOKEN,
+        url: "https://graph.facebook.com/v2.6/me/messages?access_token=EAAChQKEZAjl0BAIWvG1jUS4rDi2X5kUy8HJYy3gdZC2ML2JDqiXkrZCocYUZAGgVLLFNKMi2TTVSAT7FZBYSZAPTPIZAgmvCYcargqHV642xCZAwzwdZAwtnUiA1AQNSF1wqWR6Nmud9Szxwd7iatq92ab1btTD1QZBBmrZAefc0n0v9xpUorlYBIbd",
         method: "POST",
         json: 
             {
