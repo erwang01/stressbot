@@ -96,7 +96,7 @@ function processEvent(webhook_event) {
 }
 
 function sendMessage(recipientID, text) {
-    request({
+    var r=request({
         url: "https://graph.facebook.com/v2.6/me/messages?access_token="+ ACCESS_TOKEN,
         method: "POST",
         json: 
@@ -110,4 +110,5 @@ function sendMessage(recipientID, text) {
                 }
             }
     });
+    console.log(r);
 }
