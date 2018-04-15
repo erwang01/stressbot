@@ -6,7 +6,7 @@ const
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()), // creates express http server
   request = require("request"),
-  ACCESS_TOKEN = "SALC5QxWMjquFS-yMq6AOSWrK_k";
+  ACCESS_TOKEN = "1991844504402888|SALC5QxWMjquFS-yMq6AOSWrK_k";
 
 
 // Sets server port and logs message on success
