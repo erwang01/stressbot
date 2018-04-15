@@ -96,7 +96,7 @@ function processEvent(webhook_event) {
 }
 
 function sendMessage(recipientID, text) {
-    var r=request({
+    request({
         url: "https://graph.facebook.com/v2.6/me/messages?access_token="+ ACCESS_TOKEN,
         method: "POST",
         json: 
@@ -109,6 +109,11 @@ function sendMessage(recipientID, text) {
                     "text": text
                 }
             }
+        },
+        function optionalCallback(err, httpResponse, body) {
+            if (err) {
+                return console.error('upload failed:', err);
+            }
+            console.log('Upload successful!  Server responded with:', body);
     });
-    console.log(r);
 }
