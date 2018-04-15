@@ -1,0 +1,16 @@
+{
+  "name": "messenger-webhook",
+  "version": "1.0.0",
+  "description": "Facebook: setting up your webhook",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "eslint": "^4.19.1",
+    "express": "^4.16.3"
+  }
+}
