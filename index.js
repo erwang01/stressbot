@@ -4,8 +4,9 @@
 const
   express = require('express'),
   bodyParser = require('body-parser'),
-  app = express().use(bodyParser.json()); // creates express http server
-  //request = require("request");
+  app = express().use(bodyParser.json()), // creates express http server
+  request = require("request"),
+  ACCESS_TOKEN = "EAAcTknAhZB8gBANvmC6YBCSApFj3aYlLl0DmgKx17h1mT3VObXfPkdZAWMeEYFAZC1ZCE6WQZBCtNkjd2ZC20C4jhwG6ihv98ZCyysWZALx44xdtZAKrBvZA6ZANavHmqZANkZCoGvefvyKuWPqpsPJlO3i4AlRwPI5OXTgZCH9XTV8HAQak30JAhxZAHWH0fQLo6djGN0ZD";
 
 
 // Sets server port and logs message on success
@@ -27,10 +28,11 @@ app.post('/webhook', (req, res) => {
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
 
-        // Gets the message. entry.messaging is an array, but 
-        // will only ever contain one message, so we get index 0
-        let webhook_event = entry.messaging[0];
-        console.log(webhook_event);
+            // Gets the message. entry.messaging is an array, but 
+            // will only ever contain one message, so we get index 0
+            let webhook_event = entry.messaging[0];
+            console.log(webhook_event);
+            processEvent(webhook_event);
         });
 
         // Returns a '200 OK' response to all requests
@@ -69,3 +71,43 @@ app.get('/webhook', (req, res) => {
         }
     }
 });
+
+function processEvent(webhook_event) {
+    var sender, recipient, text, url, nlp;
+    if(webhook_event.sender && webhook_event.sender.id) {
+        sender = webhook_event.sender.id;
+    }
+    if(webhook_event.recipient && webhook_event.recipient.id) {
+        sender = webhook_event.recipient.id;
+    }
+    if(webhook_event.message) {
+        if(webhook_event.message.text) {
+            text=webhook_event.message.text;
+        }
+        if (webhook_event.message.attachments && webhook_event.message.attachments.URL) {
+            url = webhook_event.message.attachments.URL;
+        }
+        if (webhook_event.message.nlp) {
+            nlp = webhook_event.message.nlp;
+            console.log(nlp);
+        }
+    }
+    sendMessage(sender, "you sent" + text);
+}
+
+function sendMessage(recipientID, text) {
+    request({
+        url: "https://graph.facebook.com/v2.6/me/messages?access_token="+ ACCESS_TOKEN,
+        method: "POST",
+        json: 
+            {
+                "messaging_type": "RESPONSE",
+                "recipient": {
+                    "id": recipientID
+                },
+                "message": {
+                    "text": text
+                }
+            }
+    });
+}
